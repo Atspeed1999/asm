@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lajawaab Korean Satin — Amber Silk Mills</title>
+  <meta name="description" content="Buy premium Korean Satin Fabric online. Wholesale manufacturer direct.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cormorant+SC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <link rel="icon" type="image/jpeg" href="../assets/images/asm-logo-green.jpg">
+  <style>
+    /* Specific adjustments for Product Page */
+    .product-page {
+      padding: var(--space-xl) 0;
+      background: var(--color-off-white);
+    }
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .product-gallery-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      margin-bottom: var(--space-sm);
+      cursor: crosshair;
+    }
+    .product-gallery-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.1s ease;
+    }
+    .product-thumbs {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .product-thumbs img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: all var(--transition-hover);
+    }
+    .product-thumbs img:hover, .product-thumbs img.active {
+      opacity: 1;
+      border-color: var(--color-primary-gold);
+    }
+    
+    .product-details {
+      position: sticky;
+      top: 100px;
+    }
+    .breadcrumb {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-sm);
+    }
+    .breadcrumb a {
+      color: var(--color-text-dark);
+      text-decoration: underline;
+    }
+    .product-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      color: var(--color-text-dark);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    .product-price {
+      font-size: 24px;
+      color: var(--color-primary-green);
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+    }
+    .product-desc {
+      font-size: 16px;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+    }
+    
+    .product-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .quantity-selector {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+      background: white;
+      width: 120px;
+    }
+    .quantity-selector button {
+      width: 40px;
+      height: 48px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      transition: background var(--transition-hover);
+    }
+    .quantity-selector button:hover {
+      background: rgba(0,0,0,0.05);
+    }
+    .quantity-selector input {
+      width: 40px;
+      height: 48px;
+      text-align: center;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 16px;
+      pointer-events: none;
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 16px;
+    }
+    .product-actions .btn {
+      flex: 1;
+      padding: 16px;
+      font-size: 15px;
+    }
+    
+    .product-accordion {
+      border-top: 1px solid var(--color-border);
+    }
+    .accordion-item {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .accordion-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px 0;
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--color-text-dark);
+    }
+    .accordion-trigger span.icon {
+      transition: transform 0.3s ease;
+    }
+    .accordion-trigger.open span.icon {
+      transform: rotate(45deg);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease;
+    }
+    .accordion-inner {
+      padding-bottom: 20px;
+      font-size: 15px;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 900px) {
+      .product-layout {
+        grid-template-columns: 1fr;
+      }
+      .product-details {
+        position: static;
+      }
+      .product-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <button class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+      <a href="../index.html" class="header-logo"><img src="../assets/images/logo-transparent.png" alt="Amber Silk Mills"></a>
+      <nav class="header-nav">
+        <a href="../index.html">Home</a>
+        <a href="page.shop.html">Shop</a>
+        <a href="page.wholesale.html">Wholesale</a>
+        <a href="page.custom-printing.html">Custom Printing</a>
+        <a href="page.bridal-edit.html">Bridal Edit</a>
+        <a href="page.about.html">About</a>
+        <a href="page.contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button aria-label="Search" style="color:var(--color-off-white);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+        <a href="page.login.html" aria-label="Account" style="color:var(--color-off-white);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <a href="#" aria-label="Cart" style="position:relative; color:var(--color-off-white);" id="cart-icon-toggle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-count" style="display:none;">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="product-page">
+    <div class="container">
+      <div class="product-layout">
+        
+        <!-- Gallery -->
+        <div class="product-gallery">
+          <div class="product-gallery-main">
+            <img src="https://ambersilkmills.in/cdn/shop/collections/korean-satin.jpg?v=1721133300&width=800" alt="Lajawaab Korean Satin main image">
+          </div>
+          <div class="product-thumbs">
+            <img src="https://ambersilkmills.in/cdn/shop/collections/korean-satin.jpg?v=1721133300&width=200" data-full="https://ambersilkmills.in/cdn/shop/collections/korean-satin.jpg?v=1721133300&width=800" alt="Thumb 1" class="active">
+            <img src="https://ambersilkmills.in/cdn/shop/collections/crepe-printed.jpg?v=1721133320&width=200" data-full="https://ambersilkmills.in/cdn/shop/collections/crepe-printed.jpg?v=1721133320&width=800" alt="Thumb 2">
+            <img src="https://ambersilkmills.in/cdn/shop/collections/digital-printed-satin-silk.jpg?v=1721133310&width=200" data-full="https://ambersilkmills.in/cdn/shop/collections/digital-printed-satin-silk.jpg?v=1721133310&width=800" alt="Thumb 3">
+          </div>
+        </div>
+
+        <!-- Details -->
+        <div class="product-details inner-reveal">
+          <div class="breadcrumb">
+            <a href="../index.html">Home</a> / <a href="page.shop.html">Shop All</a> / <span>Lajawaab Korean Satin</span>
+          </div>
+          
+          <h1 class="product-title">Lajawaab Korean Satin</h1>
+          <div class="product-price">₹599 / 6m bundle</div>
+          
+          <p class="product-desc">Experience the luxurious drape and subtle sheen of our premium Korean Satin. Ideal for gowns, structured bridal wear, and premium ethnic ensembles. Supplied in pristine condition directly from our mills.</p>
+
+          <div class="product-form">
+            <div class="form-group">
+              <label>Quantity</label>
+              <div class="quantity-selector">
+                <button type="button" aria-label="Decrease quantity" data-minus>−</button>
+                <input type="text" value="1" aria-label="Quantity" readonly>
+                <button type="button" aria-label="Increase quantity" data-plus>+</button>
+              </div>
+            </div>
+
+            <div class="product-actions">
+              <button class="btn btn-outline" data-add-to-cart data-variant-id="123456">Add to Cart</button>
+              <button class="btn btn-primary" style="background:var(--color-primary-green);color:white;">Buy It Now</button>
+            </div>
+            
+            <p style="font-size:12px;color:var(--color-text-muted);display:flex;align-items:center;gap:6px;margin-top:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Dispatches from Delhi within 24 hours
+            </p>
+          </div>
+
+          <!-- Accordions -->
+          <div class="product-accordion">
+            <div class="accordion-item">
+              <button class="accordion-trigger" data-accordion="#acc-specs">
+                Product Specifications
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content" id="acc-specs">
+                <div class="accordion-inner">
+                  <ul style="list-style:disc;padding-left:16px;">
+                    <li><strong>Fabric:</strong> 100% Polyester Korean Satin</li>
+                    <li><strong>Width:</strong> 44 inches (112 cm)</li>
+                    <li><strong>Weight:</strong> 140 GSM</li>
+                    <li><strong>Wash Care:</strong> Dry clean recommended. Do not bleach.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item">
+              <button class="accordion-trigger" data-accordion="#acc-shipping">
+                Shipping & Returns
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content" id="acc-shipping">
+                <div class="accordion-inner">
+                  <p>Free standard shipping on orders above ₹2,500. Express shipping available at checkout.</p>
+                  <p style="margin-top:8px;">Returns accepted within 7 days of delivery only for uncut, unwashed fabrics in original condition.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item">
+              <button class="accordion-trigger" data-accordion="#acc-bulk">
+                Bulk / Wholesale Inquiry
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content" id="acc-bulk">
+                <div class="accordion-inner">
+                  <p>Need more than 30 metres? Contact our wholesale team for B2B pricing and GST invoices.</p>
+                  <a href="https://wa.me/919625242165" class="btn btn-outline" style="margin-top:16px;padding:8px 16px;font-size:12px;">Chat on WhatsApp</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <img src="../assets/images/logo-transparent.png" alt="Amber Silk Mills" class="footer-logo">
+        <p class="footer-tagline">A Legacy of Luxury Since 1938.</p>
+        <p class="footer-legal">GST: 07AJDPJ0004B1Z8</p>
+        <p class="footer-legal">IEC: AJDPJ0004B</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="../index.html">Home</a>
+        <a href="page.shop.html">Shop All</a>
+        <a href="page.wholesale.html">Wholesale</a>
+        <a href="page.custom-printing.html">Custom Printing</a>
+        <a href="page.bridal-edit.html">Bridal Edit</a>
+        <a href="page.contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="https://wa.me/919625242165">WhatsApp: +91 96252 42165</a>
+        <a href="mailto:info@ambersilkmills.in">Email Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Amber Silk Mills. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919625242165" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <button class="back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></button>
+  
+  <!-- Side Cart -->
+  <div class="side-cart-overlay" id="side-cart-overlay"></div>
+  <div class="side-cart" id="side-cart">
+    <div class="side-cart-header">
+      <h3>Your Cart</h3>
+      <button class="side-cart-close" id="side-cart-close" aria-label="Close cart">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <div class="side-cart-body">
+      <div class="side-cart-empty">
+        <p>Your cart is currently empty.</p>
+        <a href="page.shop.html" class="btn btn-outline" style="margin-top:16px;">Continue Shopping</a>
+      </div>
+    </div>
+    <div class="side-cart-footer">
+      <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-weight:600;">
+        <span>Subtotal</span>
+        <span>₹0.00</span>
+      </div>
+      <button class="btn btn-primary" style="background:var(--color-primary-green);color:white;">View Checkout</button>
+    </div>
+  </div>
+
+  <script src="../assets/theme.js"></script>
+</body>
+</html>

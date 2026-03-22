@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cormorant+SC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=snap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/theme.css">
+  <link rel="icon" type="image/jpeg" href="../assets/images/asm-logo-green.jpg">
 </head>
 <body>
 
@@ -16,7 +17,7 @@
   <header class="site-header">
     <div class="header-inner">
       <button class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
-      <a href="../index.html" class="header-logo"><img src="../assets/images/asm-logo.jpg" alt="Amber Silk Mills" width="160" height="52"></a>
+      <a href="../index.html" class="header-logo"><img src="../assets/images/asm-logo-transparent.png" alt="Amber Silk Mills" width="160" height="52"></a>
       <nav class="header-nav">
         <a href="../index.html">Home</a>
         <a href="page.wholesale.html">Wholesale</a>
@@ -32,14 +33,19 @@
   </header>
 
   <!-- Hero -->
-  <section class="page-hero" style="padding:var(--space-2xl) 0;background:linear-gradient(135deg, #1A3C2E 0%, #0F2A1E 100%);">
-    <div class="container">
-      <span class="pre-label">Curated for Your Big Day</span>
-      <h1 style="font-style:italic;">The Bridal Edit.</h1>
-      <p>Where heritage craftsmanship meets contemporary bridal design. Fabrics woven for once-in-a-lifetime moments — from Banarasi Brocade to hand-embroidered Zardozi.</p>
-      <div class="page-hero-ctas">
-        <a href="#bridal-collection" class="btn btn-primary">Explore Bridal Fabrics</a>
-        <a href="https://wa.me/919625242165?text=Hi%2C%20I%27m%20looking%20for%20bridal%20fabrics." class="btn btn-outline" style="color:var(--color-primary-gold);border-color:var(--color-primary-gold);">Consult on WhatsApp</a>
+  <section class="page-hero" style="padding:var(--space-2xl) 0;background:linear-gradient(135deg, #1A3C2E 0%, #0F2A1E 100%);position:relative;overflow:hidden;">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl);align-items:center;position:relative;z-index:2;">
+      <div>
+        <span class="pre-label">Curated for Your Big Day</span>
+        <h1 style="font-style:italic;">The Bridal Edit.</h1>
+        <p>Where heritage craftsmanship meets contemporary bridal design. Fabrics woven for once-in-a-lifetime moments — from Banarasi Brocade to hand-embroidered Zardozi.</p>
+        <div class="page-hero-ctas">
+          <a href="#bridal-collection" class="btn btn-primary">Explore Bridal Fabrics</a>
+          <a href="https://wa.me/919625242165?text=Hi%2C%20I%27m%20looking%20for%20bridal%20fabrics." class="btn btn-outline" style="color:var(--color-primary-gold);border-color:var(--color-primary-gold);">Consult on WhatsApp</a>
+        </div>
+      </div>
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+        <img src="../assets/images/bridal-editorial-green.png" alt="Model in exquisite green bridal lehenga" style="width:100%;height:auto;display:block;">
       </div>
     </div>
   </section>
@@ -126,19 +132,21 @@
   </section>
 
   <!-- Bridal WhatsApp CTA -->
-  <section class="section section-light" style="border-top:2px solid var(--color-primary-gold);text-align:center;">
-    <div class="container reveal" style="max-width:640px;">
-      <span class="pre-label">Personalised Consultation</span>
-      <h2>Let Us Help You Find Your Dream Fabric.</h2>
-      <p style="color:var(--color-text-muted);font-size:16px;margin-bottom:var(--space-md);">Our bridal fabric specialists have dressed thousands of brides. Share your vision — mood board, colour palette, or reference images — and we'll curate a selection just for you.</p>
-      <a href="https://wa.me/919625242165?text=Hi%2C%20I%27m%20looking%20for%20bridal%20fabrics%20for%20my%20upcoming%20wedding." class="btn btn-primary" style="font-size:16px;padding:18px 40px;">Start Your Bridal Consultation →</a>
+  <section class="section section-light" style="position:relative;border-top:2px solid var(--color-primary-gold);text-align:center;color:white;overflow:hidden;min-height:400px;display:flex;align-items:center;justify-content:center;">
+    <img src="../assets/images/bridal-editorial-trio.png" alt="Bridal editorial photoshoot" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(15, 42, 30, 0.75);z-index:1;"></div>
+    <div class="container reveal" style="max-width:640px;position:relative;z-index:2;">
+      <span class="pre-label" style="color:var(--color-primary-gold);">Personalised Consultation</span>
+      <h2 style="color:white;">Let Us Help You Find Your Dream Fabric.</h2>
+      <p style="color:rgba(255,255,255,0.9);font-size:16px;margin-bottom:var(--space-md);">Our bridal fabric specialists have dressed thousands of brides. Share your vision — mood board, colour palette, or reference images — and we'll curate a selection just for you.</p>
+      <a href="https://wa.me/919625242165?text=Hi%2C%20I%27m%20looking%20for%20bridal%20fabrics%20for%20my%20upcoming%20wedding." class="btn btn-primary" style="font-size:16px;padding:18px 40px;background-color:var(--color-primary-gold);color:#0F2A1E;">Start Your Bridal Consultation →</a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-grid">
-      <div class="footer-col footer-brand"><img src="../assets/images/asm-logo.jpg" alt="Amber Silk Mills" class="footer-logo"><p class="footer-tagline">A Legacy of Luxury Since 1938.</p></div>
+      <div class="footer-col footer-brand"><img src="../assets/images/asm-logo-transparent.png" alt="Amber Silk Mills" class="footer-logo"><p class="footer-tagline">A Legacy of Luxury Since 1938.</p></div>
       <div class="footer-col"><h4>Quick Links</h4><a href="../index.html">Home</a><a href="page.wholesale.html">Wholesale</a><a href="page.custom-printing.html">Custom Printing</a><a href="page.about.html">About Us</a><a href="page.contact.html">Contact</a></div>
       <div class="footer-col"><h4>Contact</h4><a href="https://wa.me/919625242165">WhatsApp: +91 96252 42165</a><a href="mailto:info@ambersilkmills.in">Email Us</a></div>
     </div>

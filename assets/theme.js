@@ -124,7 +124,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* --- Cart AJAX (Shopify) --- */
+/* --- Cart AJAX (Shopify) --- */
+  const cartIconToggles = document.querySelectorAll('#cart-icon-toggle, [href="/cart"]');
+  const sideCart = document.getElementById('side-cart');
+  const sideCartClose = document.getElementById('side-cart-close');
+  const overlay = document.getElementById('side-cart-overlay');
+
+  function openCart() {
+    if (sideCart) sideCart.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCart() {
+    if (sideCart) sideCart.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  cartIconToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCart();
+    });
+  });
+
+  if (sideCartClose) sideCartClose.addEventListener('click', closeCart);
+  if (overlay) overlay.addEventListener('click', closeCart);
+
   document.querySelectorAll('[data-add-to-cart]').forEach(btn => {
     btn.addEventListener('click', async (e) => {
       e.preventDefault();
@@ -141,14 +168,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (res.ok) {
           btn.textContent = 'Added ✓';
           updateCartCount();
+          openCart(); // Automatically open cart on success
           setTimeout(() => {
             btn.textContent = 'Add to Cart';
             btn.disabled = false;
           }, 2000);
+        } else {
+          // If no backend endpoint exists (static demo mode)
+          throw new Error('Static Mode');
         }
       } catch (err) {
-        btn.textContent = 'Add to Cart';
-        btn.disabled = false;
+        // Mock success for static HTML demo
+        btn.textContent = 'Added ✓';
+        document.querySelectorAll('.cart-count').forEach(el => {
+          el.textContent = parseInt(el.textContent) + parseInt(qty);
+          el.style.display = 'flex';
+        });
+        openCart();
+        setTimeout(() => {
+          btn.textContent = 'Add to Cart';
+          btn.disabled = false;
+        }, 2000);
       }
     });
   });
@@ -161,7 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent = cart.item_count;
         el.style.display = cart.item_count > 0 ? 'flex' : 'none';
       });
-    } catch (e) {}
+    } catch (e) {
+      // Mock failure swallow for static
+    }
   }
 
   /* --- Quantity Selector --- */

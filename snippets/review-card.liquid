@@ -1,0 +1,11 @@
+<!-- snippets/review-card.liquid -->
+<!-- Usage: {% render 'review-card', quote: 'text', author: 'Name', country: 'Country', flag: '🇳🇱' %} -->
+<div class="review-card reveal">
+  <div class="review-stars">★★★★★</div>
+  <blockquote class="review-quote">"{{ quote }}"</blockquote>
+  <div>
+    <span class="review-author">{{ author }}</span>
+    {% if flag %} {{ flag }}{% endif %}
+    <span class="review-country">{{ country }}</span>
+  </div>
+</div>

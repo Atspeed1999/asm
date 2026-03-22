@@ -1,0 +1,27 @@
+<!-- snippets/product-card.liquid -->
+<!-- Usage: {% render 'product-card', product: product %} -->
+<div class="product-card">
+  <a href="{{ product.url | default: '#' }}">
+    <div class="product-card-image">
+      <img
+        src="{{ product.featured_image | img_url: '400x400', crop: 'center' | default: 'https://ambersilkmills.in/cdn/shop/files/placeholder.png' }}"
+        alt="{{ product.title | escape }}"
+        loading="lazy"
+        width="400"
+        height="400"
+      >
+    </div>
+    <div class="product-card-info">
+      {% if product.type %}
+        <span class="product-card-type">{{ product.type }}</span>
+      {% endif %}
+      <h4 class="product-card-name">{{ product.title }}</h4>
+      <p class="product-card-price">{{ product.price | money }}</p>
+    </div>
+  </a>
+  <div style="padding: 0 12px 12px;">
+    <button class="btn btn-primary product-card-btn" data-add-to-cart data-variant-id="{{ product.variants.first.id }}">
+      Add to Cart
+    </button>
+  </div>
+</div>

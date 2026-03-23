@@ -222,8 +222,8 @@ h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
 
 /* --- Announcement Bar --- */
 .announcement-bar {
-  background: var(--color-primary-green);
-  color: var(--color-primary-gold);
+  background: var(--color-primary-gold);
+  color: var(--color-primary-green);
   text-align: center;
   padding: 10px var(--space-md);
   font-family: var(--font-accent);

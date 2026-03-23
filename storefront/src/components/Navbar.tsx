@@ -46,9 +46,9 @@ export default function Navbar() {
             <Image 
               src="/assets/images/logo-transparent.png" 
               alt="Amber Silk Mills" 
-              width={160} 
-              height={52} 
-              className={`object-contain transition-all duration-300 ${scrolled ? 'h-[38px]' : 'h-[52px]'}`}
+              width={208} 
+              height={68} 
+              className={`object-contain transition-all duration-300 ${scrolled ? 'h-[50px]' : 'h-[68px]'}`}
             />
           </Link>
 

@@ -227,7 +227,8 @@ h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
   text-align: center;
   padding: 10px var(--space-md);
   font-family: var(--font-accent);
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   position: relative;
@@ -284,10 +285,10 @@ h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
 }
 
 .header-logo img {
-  max-height: 52px;
+  max-height: 68px;
   transition: max-height var(--transition-hover);
 }
-.site-header.scrolled .header-logo img { max-height: 38px; }
+.site-header.scrolled .header-logo img { max-height: 50px; }
 
 .header-nav {
   display: none;

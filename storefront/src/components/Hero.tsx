@@ -83,7 +83,7 @@ export default function Hero() {
             <div className="grid grid-cols-2 grid-rows-[2fr_1fr] gap-3 h-full pb-10">
               <motion.div className="col-span-2 relative border-2 border-[#C9A84C] rounded overflow-hidden" style={{ y: collageY1 }}>
                 <Image 
-                  src="/assets/images/Model_posing_in_202603222249-2.jpeg" 
+                  src="/assets/images/mmh.png" 
                   alt="Models wearing premium sarees" 
                   fill 
                   className="object-cover object-top"

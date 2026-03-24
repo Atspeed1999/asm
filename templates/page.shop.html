@@ -256,28 +256,31 @@
   </style>
   
   <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
-  <script>
-    function showProductDetails(event) {
-      // Update a dialog context with a selected product
-      document.getElementById("product-modal-context").update(event);
-      // Show the dialog
-      document.getElementById("product-modal").showModal();
-    }
-  </script>
 </head>
-<body>\n  <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
+<body>
+  <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
 
-  <!-- Shopify Store Integration -->
-  
-    
-    <!-- Header -->
-    <header class="site-header">
+    <!-- ==================== ANNOUNCEMENT BAR ==================== -->
+    <div class="announcement-bar" id="announcement-bar">
+      <span class="announcement-text active">Free Shipping on Orders Above ₹2,500</span>
+      <span class="announcement-text">Custom Digital Printing — Request a Quote</span>
+      <span class="announcement-text">87 Years of Manufacturing Heritage Since 1938</span>
+      <span class="announcement-text">International Shipping Available · IEC Registered Exporter</span>
+      <button class="dismiss-btn" aria-label="Dismiss announcement">✕</button>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="site-header" id="site-header">
       <div class="header-inner">
-        <button class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
-        <a href="../index.html" class="header-logo"><img src="../assets/images/logo-transparent.png" alt="Amber Silk Mills"></a>
+        <button class="menu-toggle" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+        <a href="../index.html" class="header-logo">
+          <img src="../assets/images/logo-transparent.png" alt="Amber Silk Mills">
+        </a>
         <nav class="header-nav">
           <a href="../index.html">Home</a>
-          <a href="page.shop.html" style="color:var(--color-primary-gold)">Shop</a>
+          <a href="page.shop.html" style="color:var(--color-primary-gold)">Shop All</a>
           <a href="page.wholesale.html">Wholesale</a>
           <a href="page.custom-printing.html">Custom Printing</a>
           <a href="page.bridal-edit.html">Bridal Edit</a>
@@ -285,21 +288,43 @@
           <a href="page.contact.html">Contact</a>
         </nav>
         <div class="header-actions">
-        <button aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        </button>
-        <a href="page.login.html" aria-label="Account">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </a>
-        <a href="https://wa.me/919625242165" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-        </a>
-        <button onclick="document.getElementById('cart').showModal()" aria-label="Cart" style="position:relative;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-        </button>
-      </div>
+          <button aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
+          <a href="page.login.html" aria-label="Account">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </a>
+          <a href="https://wa.me/919625242165" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+          </a>
+          <button onclick="document.getElementById('cart').showModal()" aria-label="Cart" style="position:relative;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          </button>
+        </div>
       </div>
     </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <button class="drawer-close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <img src="../assets/images/logo-transparent.png" alt="Amber Silk Mills" class="drawer-logo">
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="page.shop.html">Shop All</a>
+        <a href="page.wholesale.html">Wholesale</a>
+        <a href="page.custom-printing.html">Custom Printing</a>
+        <a href="page.bridal-edit.html">Bridal Edit</a>
+        <a href="page.about.html">About</a>
+        <a href="page.contact.html">Contact</a>
+      </nav>
+      <div class="drawer-cta">
+        <a href="https://wa.me/919625242165" class="btn btn-outline-light" style="width:100%;color:var(--color-primary-gold);border-color:var(--color-primary-gold);">
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
 
     <!-- Shop Header -->
     <section class="shop-header">

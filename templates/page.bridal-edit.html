@@ -10,14 +10,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cormorant+SC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=snap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/theme.css">
   <link rel="icon" type="image/jpeg" href="../assets/images/asm-logo-green.jpg">
-  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>\n</head>
-<body>\n  <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
+  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
+</head>
+<body>
+  <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
 
-  <!-- Header -->
-  <header class="site-header">
+  <!-- ==================== ANNOUNCEMENT BAR ==================== -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span class="announcement-text active">Free Shipping on Orders Above ₹2,500</span>
+    <span class="announcement-text">Custom Digital Printing — Request a Quote</span>
+    <span class="announcement-text">87 Years of Manufacturing Heritage Since 1938</span>
+    <span class="announcement-text">International Shipping Available · IEC Registered Exporter</span>
+    <button class="dismiss-btn" aria-label="Dismiss announcement">✕</button>
+  </div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" id="site-header">
     <div class="header-inner">
-      <button class="menu-toggle" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
-      <a href="../index.html" class="header-logo"><img src="../assets/images/logo-transparent.png" alt="Amber Silk Mills" width="160" height="52"></a>
+      <button class="menu-toggle" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+      <a href="../index.html" class="header-logo">
+        <img src="../assets/images/logo-transparent.png" alt="Amber Silk Mills">
+      </a>
       <nav class="header-nav">
         <a href="../index.html">Home</a>
         <a href="page.wholesale.html">Wholesale</a>
@@ -42,6 +57,27 @@
       </div>
     </div>
   </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <button class="drawer-close" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <img src="../assets/images/logo-transparent.png" alt="Amber Silk Mills" class="drawer-logo">
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="page.wholesale.html">Wholesale</a>
+      <a href="page.custom-printing.html">Custom Printing</a>
+      <a href="page.bridal-edit.html">Bridal Edit</a>
+      <a href="page.about.html">About</a>
+      <a href="page.contact.html">Contact</a>
+    </nav>
+    <div class="drawer-cta">
+      <a href="https://wa.me/919625242165" class="btn btn-outline-light" style="width:100%;color:var(--color-primary-gold);border-color:var(--color-primary-gold);">
+        Chat on WhatsApp
+      </a>
+    </div>
+  </div>
 
   <!-- Hero -->
   <section class="page-hero" style="padding:var(--space-2xl) 0;background:linear-gradient(135deg, #1A3C2E 0%, #0F2A1E 100%);position:relative;overflow:hidden;">

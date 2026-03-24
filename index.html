@@ -400,23 +400,23 @@
         <p style="color:rgba(247,243,237,0.7);">Expertly curated 6-metre bundles — the finest fabrics for your next creation, delivered to your studio.</p>
       </div>
       
-        <shopify-list-context type="product" query="Lajawan OR Lajawaab OR Lajawab" first="5" country="IN">
-          <div class="spotlight-scroll">
-            <template>
-              <div class="spotlight-card">
-                <shopify-media width="400" query="product.selectedOrFirstAvailableVariant.image" style="display:block; background:#f4f4f4; border-radius:8px; overflow:hidden;"></shopify-media>
-                <div class="spotlight-card-info">
-                  <h4 class="spotlight-card-name"><shopify-data query="product.title"></shopify-data></h4>
-                  <p class="spotlight-card-price"><shopify-money format="money_with_currency" query="product.selectedOrFirstAvailableVariant.price"></shopify-money></p>
-                  <button class="btn btn-primary" onclick="window.location.href='templates/page.shop.html'">Buy Now</button>
-                </div>
+      <div class="spotlight-scroll">
+        <shopify-list-context type="product" query="Lajawaab OR Lajawab" first="5" country="IN">
+          <template>
+            <div class="spotlight-card">
+              <shopify-media width="400" query="product.selectedOrFirstAvailableVariant.image" style="display:block; background:#f4f4f4; border-radius:8px; overflow:hidden;"></shopify-media>
+              <div class="spotlight-card-info">
+                <h4 class="spotlight-card-name"><shopify-data query="product.title"></shopify-data></h4>
+                <p class="spotlight-card-price"><shopify-money format="money_with_currency" query="product.selectedOrFirstAvailableVariant.price"></shopify-money></p>
+                <button class="btn btn-primary" onclick="window.location.href='templates/page.shop.html'">Buy Now</button>
               </div>
-            </template>
-            <div shopify-loading-placeholder style="text-align: center; padding: 40px; color: var(--color-text-muted); width: 100%;">
-              Loading collection...
             </div>
+          </template>
+          <div shopify-loading-placeholder style="text-align: center; padding: 40px; color: var(--color-text-muted); width: 100%;">
+            Loading collection...
           </div>
         </shopify-list-context>
+      </div>
       
       <div style="text-align:center;margin-top:var(--space-md);">
         <a href="templates/page.shop.html" style="color:var(--color-primary-gold);font-size:14px;font-weight:500;">View Full Collection →</a>

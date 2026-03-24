@@ -310,15 +310,15 @@ h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); }
 }
 
 .header-logo img {
-  max-height: 47px;
+  max-height: 80px;
   transition: max-height var(--transition-hover);
 }
 @media (min-width: 768px) {
-  .header-logo img { max-height: 52px; }
+  .header-logo img { max-height: 90px; }
 }
-.site-header.scrolled .header-logo img { max-height: 34px; }
+.site-header.scrolled .header-logo img { max-height: 55px; }
 @media (min-width: 768px) {
-  .site-header.scrolled .header-logo img { max-height: 38px; }
+  .site-header.scrolled .header-logo img { max-height: 65px; }
 }
 
 .header-nav {

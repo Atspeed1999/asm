@@ -37,7 +37,8 @@
       "contactType": "sales"
     }
   }
-  </script>
+  <!-- Shopify Web Components -->
+  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
 </head>
 <body>
 
@@ -397,48 +398,25 @@
         <h2 style="color:var(--color-off-white);">The Lajawaab Collection.</h2>
         <p style="color:rgba(247,243,237,0.7);">Expertly curated 6-metre bundles — the finest fabrics for your next creation, delivered to your studio.</p>
       </div>
-      <div class="spotlight-scroll">
-        <div class="spotlight-card">
-          <img src="https://ambersilkmills.in/cdn/shop/collections/korean-satin.jpg?v=1721133300&width=400" alt="Korean Satin Fabric" loading="lazy">
-          <div class="spotlight-card-info">
-            <h4 class="spotlight-card-name">Lajawaab Korean Satin</h4>
-            <p class="spotlight-card-price">₹599 / 6m bundle</p>
-            <button class="btn btn-primary">Add to Cart</button>
+      <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
+        <shopify-list-context type="product" query="Lajawan OR Lajawaab OR Lajawab" first="5" country="IN">
+          <div class="spotlight-scroll">
+            <template>
+              <div class="spotlight-card">
+                <shopify-media width="400" query="product.selectedOrFirstAvailableVariant.image" style="display:block; background:#f4f4f4; border-radius:8px; overflow:hidden;"></shopify-media>
+                <div class="spotlight-card-info">
+                  <h4 class="spotlight-card-name"><shopify-data query="product.title"></shopify-data></h4>
+                  <p class="spotlight-card-price"><shopify-money format="money_with_currency" query="product.selectedOrFirstAvailableVariant.price"></shopify-money></p>
+                  <button class="btn btn-primary" onclick="window.location.href='templates/page.shop.html'">Buy Now</button>
+                </div>
+              </div>
+            </template>
+            <div shopify-loading-placeholder style="text-align: center; padding: 40px; color: var(--color-text-muted); width: 100%;">
+              Loading collection...
+            </div>
           </div>
-        </div>
-        <div class="spotlight-card">
-          <img src="https://ambersilkmills.in/cdn/shop/collections/digital-printed-satin-silk.jpg?v=1721133310&width=400" alt="Digital Printed Satin Silk" loading="lazy">
-          <div class="spotlight-card-info">
-            <h4 class="spotlight-card-name">Digital Printed Satin Silk</h4>
-            <p class="spotlight-card-price">₹799 / 6m bundle</p>
-            <button class="btn btn-primary">Add to Cart</button>
-          </div>
-        </div>
-        <div class="spotlight-card">
-          <img src="https://ambersilkmills.in/cdn/shop/collections/crepe-printed.jpg?v=1721133320&width=400" alt="Crepe Printed Fabric" loading="lazy">
-          <div class="spotlight-card-info">
-            <h4 class="spotlight-card-name">Crepe Printed Fabric</h4>
-            <p class="spotlight-card-price">₹649 / 6m bundle</p>
-            <button class="btn btn-primary">Add to Cart</button>
-          </div>
-        </div>
-        <div class="spotlight-card">
-          <img src="https://ambersilkmills.in/cdn/shop/collections/mukesh-work.jpg?v=1721133330&width=400" alt="Mukesh Work on Georgette" loading="lazy">
-          <div class="spotlight-card-info">
-            <h4 class="spotlight-card-name">Mukesh Work Georgette</h4>
-            <p class="spotlight-card-price">₹899 / 6m bundle</p>
-            <button class="btn btn-primary">Add to Cart</button>
-          </div>
-        </div>
-        <div class="spotlight-card">
-          <img src="https://ambersilkmills.in/cdn/shop/collections/foil-print.jpg?v=1721133340&width=400" alt="Foil Print Malai Silk" loading="lazy">
-          <div class="spotlight-card-info">
-            <h4 class="spotlight-card-name">Foil Print Malai Silk</h4>
-            <p class="spotlight-card-price">₹749 / 6m bundle</p>
-            <button class="btn btn-primary">Add to Cart</button>
-          </div>
-        </div>
-      </div>
+        </shopify-list-context>
+      </shopify-store>
       <div style="text-align:center;margin-top:var(--space-md);">
         <a href="/collections/lajawaab-collection" style="color:var(--color-primary-gold);font-size:14px;font-weight:500;">View Full Collection →</a>
       </div>

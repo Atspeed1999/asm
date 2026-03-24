@@ -7,9 +7,9 @@ export default function Footer() {
     <footer className="bg-[#0F2A1E] text-[var(--color-off-white)] pt-[80px]">
       <div className="max-w-[1280px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-[60px]">
         
-        {/* Col 1 */}
+        {/* Brand */}
         <div className="flex flex-col gap-4">
-          <Image src="/assets/images/logo-transparent.png" alt="Amber Silk Mills" width={140} height={45} className="mb-2" />
+          <Image src="/assets/images/tc-logo.png" alt="Amber Silk Mills" width={140} height={45} className="mb-2" />
           <p className="font-cormorant italic text-[18px] text-[#C9A84C]">A Legacy of Luxury Since 1938.</p>
           <div className="font-inter text-[13px] text-[var(--color-off-white)]/60 space-y-1">
             <p>GST: 07AJDPJ0004B1Z8</p>

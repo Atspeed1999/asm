@@ -44,11 +44,11 @@ export default function Navbar() {
 
           <Link href="/" className="relative z-10 transition-transform duration-300">
             <Image 
-              src="/assets/images/logo-transparent.png" 
+              src="/assets/images/tc-logo.png" 
               alt="Amber Silk Mills" 
-              width={208} 
-              height={68} 
-              className={`object-contain transition-all duration-300 ${scrolled ? 'h-[50px]' : 'h-[68px]'}`}
+              width={159} 
+              height={52} 
+              className={`object-contain transition-all duration-300 ${scrolled ? 'h-[34px] md:h-[38px]' : 'h-[47px] md:h-[52px]'}`}
             />
           </Link>
 
@@ -129,7 +129,7 @@ export default function Navbar() {
             <button className="absolute top-6 right-6 text-[var(--color-off-white)]" onClick={() => setOpen(false)}>
               <X className="w-8 h-8" strokeWidth={1.5} />
             </button>
-            <Image src="/assets/images/logo-transparent.png" alt="Logo" width={160} height={52} className="mb-10 object-contain" />
+            <Image src="/assets/images/tc-logo.png" alt="Logo" width={122} height={40} className="mb-10 object-contain" />
             <div className="flex flex-col gap-2">
               {NAV_LINKS.map((item, i) => (
                 <Link 

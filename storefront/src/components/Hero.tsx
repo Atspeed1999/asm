@@ -12,6 +12,13 @@ export default function Hero() {
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-[var(--color-primary-green)] flex items-center pt-[76px]">
       
+      {/* Mobile Video Background */}
+      <video 
+        className="absolute inset-0 w-full h-full object-cover z-0 block md:hidden opacity-50"
+        src="/assets/mmd.mp4"
+        autoPlay loop muted playsInline
+      />
+
       {/* Noise texture */}
       <div 
         className="absolute inset-0 z-[1] pointer-events-none opacity-[0.04]" 

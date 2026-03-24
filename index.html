@@ -40,7 +40,7 @@
   <!-- Shopify Web Components -->
   <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
 </head>
-<body>
+<body>\n  <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
 
   <!-- ==================== ANNOUNCEMENT BAR ==================== -->
   <div class="announcement-bar" id="announcement-bar">
@@ -61,7 +61,7 @@
 
       <!-- Logo -->
       <a href="/" class="header-logo">
-        <img src="assets/images/tc-logo.png" alt="Amber Silk Mills">
+        <img src="assets/images/logo-transparent.png" alt="Amber Silk Mills">
       </a>
 
       <!-- Desktop Nav -->
@@ -86,10 +86,9 @@
         <a href="https://wa.me/919625242165" target="_blank" rel="noopener" aria-label="WhatsApp">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
         </a>
-        <a href="/cart" aria-label="Cart" style="position:relative;">
+        <button onclick="document.getElementById('cart').showModal()" aria-label="Cart" style="position:relative;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-          <span class="cart-count" style="display:none;">0</span>
-        </a>
+        </button>
       </div>
     </div>
 
@@ -140,7 +139,7 @@
     <button class="drawer-close" aria-label="Close menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
-    <img src="assets/images/tc-logo.png" alt="Amber Silk Mills" class="drawer-logo">
+    <img src="assets/images/logo-transparent.png" alt="Amber Silk Mills" class="drawer-logo">
     <nav>
       <a href="templates/page.shop.html">Shop All</a>
       <a href="templates/page.wholesale.html">Wholesale</a>
@@ -310,7 +309,7 @@
           </div>
         </div>
         <!-- Card 6 — CTA -->
-        <a href="/collections/all" class="category-cta-card">
+        <a href="templates/page.shop.html" class="category-cta-card">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 12h18"/><path d="M12 3v18"/></svg>
           <h3>View Full Catalog</h3>
           <p>5,000+ designs across 15 fabric categories</p>
@@ -398,7 +397,7 @@
         <h2 style="color:var(--color-off-white);">The Lajawaab Collection.</h2>
         <p style="color:rgba(247,243,237,0.7);">Expertly curated 6-metre bundles — the finest fabrics for your next creation, delivered to your studio.</p>
       </div>
-      <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
+      
         <shopify-list-context type="product" query="Lajawan OR Lajawaab OR Lajawab" first="5" country="IN">
           <div class="spotlight-scroll">
             <template>
@@ -416,9 +415,9 @@
             </div>
           </div>
         </shopify-list-context>
-      </shopify-store>
+      
       <div style="text-align:center;margin-top:var(--space-md);">
-        <a href="/collections/lajawaab-collection" style="color:var(--color-primary-gold);font-size:14px;font-weight:500;">View Full Collection →</a>
+        <a href="templates/page.shop.html" style="color:var(--color-primary-gold);font-size:14px;font-weight:500;">View Full Collection →</a>
       </div>
     </div>
   </section>
@@ -491,7 +490,7 @@
     <div class="footer-grid">
       <!-- Col 1 — Brand -->
       <div class="footer-col footer-brand">
-        <img src="assets/images/tc-logo.png" alt="Amber Silk Mills" class="footer-logo">
+        <img src="assets/images/logo-transparent.png" alt="Amber Silk Mills" class="footer-logo">
         <p class="footer-tagline">A Legacy of Luxury Since 1938.</p>
         <p class="footer-legal">GST: 07AJDPJ0004B1Z8</p>
         <p class="footer-legal">IEC: AJDPJ0004B</p>
@@ -580,34 +579,10 @@
   </div>
 
   <!-- Side Cart -->
-  <div class="side-cart-overlay" id="side-cart-overlay"></div>
-  <div class="side-cart" id="side-cart">
-    <div class="side-cart-header">
-      <h3>Your Cart</h3>
-      <button class="side-cart-close" id="side-cart-close" aria-label="Close cart">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-      </button>
-    </div>
-    <div class="side-cart-body">
-      <div class="side-cart-empty">
-        <p>Your cart is currently empty.</p>
-        <a href="templates/page.shop.html" class="btn btn-outline" style="margin-top:16px;">Continue Shopping</a>
-      </div>
-      <!-- Cart items would be magically injected here -->
-    </div>
-    <div class="side-cart-footer">
-      <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-weight:600;">
-        <span>Subtotal</span>
-        <span>₹0.00</span>
-      </div>
-      <p style="font-size:12px;color:var(--color-text-muted);margin-bottom:16px;text-align:center;">Shipping & taxes calculated at checkout</p>
-      <button class="btn btn-primary" style="background:var(--color-primary-green);color:white;">View Checkout</button>
-    </div>
-  </div>
-
+  
   <!-- Scripts -->
   <script src="assets/theme.js"></script>
   <script src="assets/exit-intent.js"></script>
 
-</body>
+  <shopify-cart id="cart"></shopify-cart>\n</shopify-store>\n</body>
 </html>

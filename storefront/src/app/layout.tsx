@@ -21,6 +21,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#F7F3ED" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const shopifyDomain = process.env.SHOPIFY_STORE_DOMAIN || "pqh2cp-x9.myshopify.com";
+  const shopifyToken = process.env.SHOPIFY_STOREFRONT_TOKEN || "2e39486c26322ed68598bb3d310eafcb";
+
   return (
     <html lang="en">
       <head>
@@ -29,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.variable} ${cormorant.variable} ${cormorant_sc.variable} antialiased bg-[var(--color-off-white)] text-[var(--color-text-dark)]`}>
         <CustomCursor />
         <MetaPixel />
-        <ShopifyProvider>
+        <ShopifyProvider domain={shopifyDomain} token={shopifyToken}>
           <ClientWrapper>{children}</ClientWrapper>
         </ShopifyProvider>
       </body>

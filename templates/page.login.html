@@ -101,8 +101,8 @@
       .login-card { padding: 32px 24px; }
     }
   </style>
-</head>
-<body>
+  <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>\n</head>
+<body>\n  <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
 
   <!-- Header -->
   <header class="site-header">
@@ -119,16 +119,18 @@
         <a href="page.contact.html">Contact</a>
       </nav>
       <div class="header-actions">
-        <button aria-label="Search" style="color:var(--color-off-white);">
+        <button aria-label="Search">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </button>
-        <a href="page.login.html" aria-label="Account" style="color:var(--color-primary-gold);">
+        <a href="page.login.html" aria-label="Account">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </a>
-        <a href="#" aria-label="Cart" style="position:relative; color:var(--color-off-white);" id="cart-icon-toggle">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-          <span class="cart-count" style="display:none;">0</span>
+        <a href="https://wa.me/919625242165" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
         </a>
+        <button onclick="document.getElementById('cart').showModal()" aria-label="Cart" style="position:relative;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        </button>
       </div>
     </div>
   </header>
@@ -208,5 +210,5 @@
   </footer>
 
   <script src="../assets/theme.js"></script>
-</body>
+  <shopify-cart id="cart"></shopify-cart>\n</shopify-store>\n</body>
 </html>

@@ -14,6 +14,156 @@
   <!-- Theme CSS -->
   <link rel="stylesheet" href="assets/theme.css">
   <link rel="icon" type="image/jpeg" href="assets/images/logo-green.jpg">
+  <style>
+    /* Product Modal Styles (for spotlight section) */
+    .product-modal {
+      padding: 0;
+      border-radius: 0.75rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 0;
+      max-width: 900px;
+      width: 90%;
+      max-height: 90vh;
+      margin: auto;
+    }
+    .product-modal::backdrop {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .product-modal__container {
+      position: relative;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 32px;
+      max-height: 90vh;
+    }
+    .product-modal__close-container {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+    }
+    .product-modal__close {
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--color-border);
+      background: white;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all var(--transition-hover);
+    }
+    .product-modal__close:hover {
+      background: var(--color-off-white);
+    }
+    .product-modal__content {
+      width: 100%;
+      background-color: #ffffff;
+    }
+    .product-modal__layout {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    @media (min-width: 768px) {
+      .product-modal__layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+    .product-modal__media {
+      flex: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f9f9f9;
+    }
+    .product-modal__media shopify-media {
+      width: 100%;
+      display: block;
+    }
+    .product-modal__details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .product-modal__header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .product-modal__vendor {
+      font-family: var(--font-accent);
+      color: var(--color-primary-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+    .product-modal__title {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-text-dark);
+      margin: 0;
+    }
+    .product-modal__price-container {
+      display: flex;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--color-primary-green);
+    }
+    .product-modal__buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .product-modal__add-button {
+      background-color: var(--color-primary-green);
+      color: #ffffff;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      border: 2px solid var(--color-primary-green);
+      transition: all 0.3s ease;
+    }
+    .product-modal__add-button:hover {
+      background: var(--color-gold-light);
+      border-color: var(--color-gold-light);
+      color: var(--color-text-dark);
+    }
+    .product-modal__add-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .product-modal__buy-button {
+      background-color: #ffffff;
+      color: var(--color-primary-green);
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      border: 2px solid var(--color-primary-green);
+      transition: all 0.3s ease;
+    }
+    .product-modal__buy-button:hover {
+      background: var(--color-off-white);
+    }
+    .product-modal__buy-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .product-modal__description-text {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+  </style>
 
   <!-- Organization Schema -->
   <script type="application/ld+json">
@@ -401,22 +551,80 @@
       </div>
       
       <div class="spotlight-scroll">
-        <shopify-list-context type="product" query="Lajawab" first="5" country="IN">
+        <shopify-list-context type="product" query="products" first="5">
           <template>
             <div class="spotlight-card">
-              <shopify-media width="400" query="product.selectedOrFirstAvailableVariant.image" style="display:block; background:#f4f4f4; border-radius:8px; overflow:hidden;"></shopify-media>
+              <shopify-media width="400" height="400" query="product.selectedOrFirstAvailableVariant.image" style="display:block; background:#f4f4f4; border-radius:8px; overflow:hidden;"></shopify-media>
               <div class="spotlight-card-info">
                 <h4 class="spotlight-card-name"><shopify-data query="product.title"></shopify-data></h4>
                 <p class="spotlight-card-price"><shopify-money format="money_with_currency" query="product.selectedOrFirstAvailableVariant.price"></shopify-money></p>
-                <button class="btn btn-primary" onclick="window.location.href='templates/page.shop.html'">Buy Now</button>
+                <button class="btn btn-primary" onclick="getElementById('spotlight-modal').showModal(); getElementById('spotlight-modal-context').update(event);">View Product</button>
               </div>
             </div>
           </template>
           <div shopify-loading-placeholder style="text-align: center; padding: 40px; color: var(--color-text-muted); width: 100%;">
-            Loading collection...
+            Loading products...
           </div>
         </shopify-list-context>
       </div>
+
+      <!-- Spotlight Product Modal -->
+      <dialog id="spotlight-modal" class="product-modal">
+        <shopify-context id="spotlight-modal-context" type="product" wait-for-update>
+          <template>
+            <div class="product-modal__container">
+              <div class="product-modal__close-container">
+                <button class="product-modal__close" onclick="getElementById('spotlight-modal').close();">&#10005;</button>
+              </div>
+              <div class="product-modal__content">
+                <div class="product-modal__layout">
+                  <div class="product-modal__media">
+                    <shopify-media width="416" height="416" query="product.selectedOrFirstAvailableVariant.image"></shopify-media>
+                  </div>
+                  <div class="product-modal__details">
+                    <div class="product-modal__header">
+                      <div>
+                        <span class="product-modal__vendor">
+                          <shopify-data query="product.vendor"></shopify-data>
+                        </span>
+                      </div>
+                      <h1 class="product-modal__title">
+                        <shopify-data query="product.title"></shopify-data>
+                      </h1>
+                      <div class="product-modal__price-container">
+                        <shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money>
+                      </div>
+                    </div>
+                    <shopify-variant-selector></shopify-variant-selector>
+                    <div class="product-modal__buttons">
+                      <button
+                        class="product-modal__add-button"
+                        onclick="getElementById('cart').addLine(event).showModal();"
+                        shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale"
+                      >
+                        Add to cart
+                      </button>
+                      <button
+                        class="product-modal__buy-button"
+                        onclick="document.querySelector('shopify-store').buyNow(event)"
+                        shopify-attr--disabled="!product.selectedOrFirstAvailableVariant.availableForSale"
+                      >
+                        Buy now
+                      </button>
+                    </div>
+                    <div class="product-modal__description">
+                      <span class="product-modal__description-text">
+                        <shopify-data query="product.descriptionHtml"></shopify-data>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <div shopify-loading-placeholder style="text-align: center; padding: 40px;">Loading product details...</div>
+        </shopify-context>
+      </dialog>
       
       <div style="text-align:center;margin-top:var(--space-md);">
         <a href="templates/page.shop.html" style="color:var(--color-primary-gold);font-size:14px;font-weight:500;">View Full Collection →</a>

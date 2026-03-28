@@ -192,7 +192,7 @@
   <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
 </head>
 <body>
-  <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
+  <shopify-store store-domain="https://atspeed.work" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
 
   <!-- ==================== ANNOUNCEMENT BAR ==================== -->
   <div class="announcement-bar" id="announcement-bar">
@@ -218,7 +218,8 @@
 
       <!-- Desktop Nav -->
       <nav class="header-nav">
-        <a href="templates/page.shop.html">Shop</a>
+        <a href="/">Home</a>
+        <a href="templates/page.shop.html">Categories</a>
         <a href="templates/page.wholesale.html">Wholesale</a>
         <a href="templates/page.custom-printing.html">Custom Printing</a>
         <a href="templates/page.bridal-edit.html">Bridal Edit</a>
@@ -237,6 +238,7 @@
 
         <button onclick="document.getElementById('cart').showModal()" aria-label="Cart" style="position:relative;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-badge" id="cart-badge"></span>
         </button>
       </div>
     </div>
@@ -290,7 +292,8 @@
     </button>
     <img src="assets/images/logo-transparent.png" alt="Amber Silk Mills" class="drawer-logo">
     <nav>
-      <a href="templates/page.shop.html">Shop</a>
+      <a href="/">Home</a>
+      <a href="templates/page.shop.html">Categories</a>
       <a href="templates/page.wholesale.html">Wholesale</a>
       <a href="templates/page.custom-printing.html">Custom Printing</a>
       <a href="templates/page.bridal-edit.html">Bridal Edit</a>
@@ -782,6 +785,22 @@
         <h3 style="margin-bottom:12px;">Thank You!</h3>
         <p>Check your email — your B2B Catalog is on its way.</p>
       </div>
+    </div>
+  </div>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-overlay__close" aria-label="Close search">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="search-overlay__inner">
+      <span class="search-overlay__label">Search Our Collection</span>
+      <form class="search-overlay__form" action="/search" method="GET">
+        <input type="text" name="q" class="search-overlay__input" placeholder="Search fabrics, collections…" autocomplete="off">
+        <button type="submit" class="search-overlay__submit" aria-label="Submit search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+      </form>
     </div>
   </div>
 

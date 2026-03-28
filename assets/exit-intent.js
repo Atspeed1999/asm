@@ -5,7 +5,7 @@
 (function() {
   const STORAGE_KEY = 'asm-exit-intent-shown';
 
-  if (localStorage.getItem(STORAGE_KEY)) return;
+  if (sessionStorage.getItem(STORAGE_KEY)) return;
 
   const overlay = document.querySelector('.exit-overlay');
   if (!overlay) return;
@@ -16,30 +16,51 @@
     if (fired) return;
     fired = true;
     overlay.classList.add('active');
-    localStorage.setItem(STORAGE_KEY, 'true');
+    sessionStorage.setItem(STORAGE_KEY, 'true');
   }
 
   function closePopup() {
     overlay.classList.remove('active');
   }
 
-  // Desktop: cursor leaves viewport
-  if (window.innerWidth > 768) {
+  const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
+
+  if (!isMobile) {
+    // Desktop: cursor leaves viewport
     document.addEventListener('mouseout', (e) => {
       if (e.clientY <= 0 && !e.relatedTarget) {
         showPopup();
       }
     });
   } else {
-    // Mobile: scroll back up after reaching 70%
+    // Mobile: scroll-based trigger (scroll to 60%+, then scroll back up 200px+)
+    let maxScrollY = 0;
     let reachedThreshold = false;
+
     window.addEventListener('scroll', () => {
       const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-      if (scrollPercent > 0.7) reachedThreshold = true;
-      if (reachedThreshold && scrollPercent < 0.4) {
+      if (scrollPercent > 0.6) reachedThreshold = true;
+
+      if (window.scrollY > maxScrollY) {
+        maxScrollY = window.scrollY;
+      }
+
+      if (reachedThreshold && (maxScrollY - window.scrollY) > 200) {
         showPopup();
       }
     }, { passive: true });
+
+    // Mobile fallback: time-based trigger after 30 seconds of inactivity
+    let inactivityTimer = setTimeout(showPopup, 30000);
+
+    // Reset timer on interaction
+    const resetTimer = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(showPopup, 30000);
+    };
+
+    window.addEventListener('touchstart', resetTimer, { passive: true });
+    window.addEventListener('scroll', resetTimer, { passive: true });
   }
 
   // Close handlers
@@ -48,6 +69,10 @@
 
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) closePopup();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closePopup();
   });
 
   // Form submit

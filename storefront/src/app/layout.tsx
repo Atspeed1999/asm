@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#F7F3ED" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const shopifyDomain = process.env.SHOPIFY_STORE_DOMAIN || "pqh2cp-x9.myshopify.com";
+  const shopifyDomain = process.env.SHOPIFY_STORE_DOMAIN || "atspeed.work";
   const shopifyToken = process.env.SHOPIFY_STOREFRONT_TOKEN || "2e39486c26322ed68598bb3d310eafcb";
 
   return (

@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sideCart) sideCart.classList.add('open');
     if (overlay) overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    updateCartCount();
   }
 
   function closeCart() {
@@ -151,6 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (sideCartClose) sideCartClose.addEventListener('click', closeCart);
   if (overlay) overlay.addEventListener('click', closeCart);
+  const continueBtn = document.getElementById('side-cart-continue');
+  if (continueBtn) continueBtn.addEventListener('click', closeCart);
 
   document.querySelectorAll('[data-add-to-cart]').forEach(btn => {
     btn.addEventListener('click', async (e) => {
@@ -193,6 +196,79 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  function formatRupees(paise) {
+    return '₹' + (paise / 100).toLocaleString('en-IN');
+  }
+
+  function renderSideCart(cart) {
+    const body = document.querySelector('.side-cart-body');
+    const subtotalEl = document.getElementById('side-cart-subtotal-amount');
+    if (!body) return;
+
+    if (!cart.items || cart.items.length === 0) {
+      body.innerHTML = '<div class="side-cart-empty"><p>Your cart is currently empty.</p><a href="page.shop.html" class="btn btn-outline" style="margin-top:16px;">Continue Shopping</a></div>';
+      if (subtotalEl) subtotalEl.textContent = '₹0';
+      return;
+    }
+
+    body.innerHTML = cart.items.map(item => `
+      <div class="side-cart-item" data-line-key="${item.key}">
+        <img src="${item.image || item.featured_image?.url || ''}" alt="${item.title}" loading="lazy">
+        <div class="side-cart-item-details">
+          <span class="side-cart-item-title">${item.product_title}</span>
+          ${item.variant_title ? `<span class="side-cart-item-variant">${item.variant_title}</span>` : ''}
+          <div class="side-cart-item-bottom">
+            <div class="side-cart-item-qty">
+              <button type="button" data-cart-minus="${item.key}" aria-label="Decrease quantity">&minus;</button>
+              <span>${item.quantity}</span>
+              <button type="button" data-cart-plus="${item.key}" aria-label="Increase quantity">&plus;</button>
+            </div>
+            <span class="side-cart-item-price">${formatRupees(item.final_line_price)}</span>
+          </div>
+          <span class="side-cart-item-remove" data-cart-remove="${item.key}">Remove</span>
+        </div>
+      </div>
+    `).join('');
+
+    if (subtotalEl) subtotalEl.textContent = formatRupees(cart.total_price);
+
+    // Quantity +/- and remove handlers
+    body.querySelectorAll('[data-cart-minus]').forEach(btn => {
+      btn.addEventListener('click', () => changeCartItemQty(btn.dataset.cartMinus, -1));
+    });
+    body.querySelectorAll('[data-cart-plus]').forEach(btn => {
+      btn.addEventListener('click', () => changeCartItemQty(btn.dataset.cartPlus, 1));
+    });
+    body.querySelectorAll('[data-cart-remove]').forEach(btn => {
+      btn.addEventListener('click', () => changeCartItemQty(btn.dataset.cartRemove, 0));
+    });
+  }
+
+  async function changeCartItemQty(lineKey, delta) {
+    try {
+      const cartRes = await fetch('/cart.js');
+      const cart = await cartRes.json();
+      const item = cart.items.find(i => i.key === lineKey);
+      if (!item) return;
+      const newQty = delta === 0 ? 0 : item.quantity + delta;
+      const res = await fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: lineKey, quantity: Math.max(0, newQty) })
+      });
+      if (res.ok) {
+        const updatedCart = await res.json();
+        renderSideCart(updatedCart);
+        document.querySelectorAll('.cart-count').forEach(el => {
+          el.textContent = updatedCart.item_count;
+          el.style.display = updatedCart.item_count > 0 ? 'flex' : 'none';
+        });
+      }
+    } catch (e) {
+      // Static mode — ignore
+    }
+  }
+
   async function updateCartCount() {
     try {
       const res = await fetch('/cart.js');
@@ -201,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent = cart.item_count;
         el.style.display = cart.item_count > 0 ? 'flex' : 'none';
       });
+      renderSideCart(cart);
     } catch (e) {
       // Mock failure swallow for static
     }
@@ -308,5 +385,207 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  /* --- Search Overlay Toggle --- */
+  const searchBtns = document.querySelectorAll('[aria-label="Search"]');
+  const searchOverlay = document.getElementById('search-overlay');
+
+  if (searchOverlay && searchBtns.length) {
+    const searchInput = searchOverlay.querySelector('.search-overlay__input');
+    const searchClose = searchOverlay.querySelector('.search-overlay__close');
+
+    function openSearch() {
+      searchOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if (searchInput) setTimeout(() => searchInput.focus(), 150);
+    }
+
+    function closeSearch() {
+      searchOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    searchBtns.forEach(btn => btn.addEventListener('click', openSearch));
+    if (searchClose) searchClose.addEventListener('click', closeSearch);
+
+    // Close on click outside the inner form
+    searchOverlay.addEventListener('click', (e) => {
+      if (e.target === searchOverlay) closeSearch();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && searchOverlay.classList.contains('open')) closeSearch();
+    });
+  }
+
+  /* --- Cart Badge (Shopify Web Components) --- */
+  const cartEl = document.getElementById('cart');
+  const cartBadges = document.querySelectorAll('.cart-badge');
+
+  function updateCartBadge() {
+    if (!cartEl) return;
+    // Shopify Web Components expose cart data via the element's internal state
+    // We listen to the 'cart' attribute or look for the badge in the shadow DOM
+    try {
+      // Try to read item count from the shopify-cart element
+      const count = cartEl.itemCount || 0;
+      cartBadges.forEach(badge => {
+        if (count > 0) {
+          badge.textContent = count;
+          badge.classList.add('visible');
+        } else {
+          badge.textContent = '';
+          badge.classList.remove('visible');
+        }
+      });
+    } catch (e) { /* swallow */ }
+  }
+
+  // Observe shopify-cart for attribute and child changes to detect cart updates
+  if (cartEl && cartBadges.length) {
+    const cartObserver = new MutationObserver(updateCartBadge);
+    cartObserver.observe(cartEl, { attributes: true, childList: true, subtree: true });
+    updateCartBadge();
+  }
+
+  // Also listen for custom shopify cart events
+  document.addEventListener('cart:updated', updateCartBadge);
+  window.addEventListener('shopify:cart:updated', updateCartBadge);
+
+  /* --- Form Validation & Submission Feedback --- */
+  var formConfigs = [
+    { id: 'contact-form', successMsg: 'Your message has been sent! We\'ll get back to you within 24 hours.', btnText: 'Send Message' },
+    { id: 'custom-printing-form', successMsg: 'Your quote request has been submitted! We\'ll respond within 24 hours.', btnText: 'Submit Custom Quote Request' },
+    { id: 'wholesale-form', successMsg: 'Your wholesale inquiry has been submitted! Our team will respond within 24 hours.', btnText: 'Submit Wholesale Inquiry' }
+  ];
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validatePhone(phone) {
+    var digits = phone.replace(/\D/g, '');
+    return digits.length >= 10;
+  }
+
+  function clearInlineErrors(form) {
+    form.querySelectorAll('.field-error').forEach(function(el) { el.remove(); });
+  }
+
+  function showFieldError(input, message) {
+    var existing = input.parentElement.querySelector('.field-error');
+    if (existing) existing.remove();
+    var err = document.createElement('span');
+    err.className = 'field-error';
+    err.style.cssText = 'color:#e53e3e;font-size:12px;display:block;margin-top:4px;';
+    err.textContent = message;
+    input.parentElement.appendChild(err);
+  }
+
+  function validateForm(form) {
+    clearInlineErrors(form);
+    var valid = true;
+
+    // Check required fields
+    form.querySelectorAll('[required]').forEach(function(input) {
+      if (!input.value.trim()) {
+        showFieldError(input, 'This field is required.');
+        valid = false;
+      }
+    });
+
+    // Validate email fields
+    form.querySelectorAll('input[type="email"]').forEach(function(input) {
+      if (input.value.trim() && !validateEmail(input.value.trim())) {
+        showFieldError(input, 'Please enter a valid email address.');
+        valid = false;
+      }
+    });
+
+    // Validate phone/tel fields
+    form.querySelectorAll('input[type="tel"]').forEach(function(input) {
+      if (input.value.trim() && !validatePhone(input.value.trim())) {
+        showFieldError(input, 'Please enter a valid phone number (at least 10 digits).');
+        valid = false;
+      }
+    });
+
+    return valid;
+  }
+
+  formConfigs.forEach(function(config) {
+    var form = document.getElementById(config.id);
+    if (!form) return;
+
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var feedbackDiv = form.querySelector('.form-feedback');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (feedbackDiv) feedbackDiv.style.display = 'none';
+
+      if (!validateForm(form)) return;
+
+      // Disable button and show sending state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending\u2026';
+
+      // Collect form data
+      var formData = new FormData(form);
+      var action = form.getAttribute('action');
+
+      // If no action is set, simulate a successful submission
+      // TODO: Configure actual form endpoints (Formspree, Netlify, etc.)
+      if (!action || action.indexOf('your-form-id') !== -1) {
+        setTimeout(function() {
+          clearInlineErrors(form);
+          form.reset();
+          submitBtn.disabled = false;
+          submitBtn.textContent = config.btnText;
+          if (feedbackDiv) {
+            feedbackDiv.textContent = '\u2713 ' + config.successMsg;
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.style.background = '#f0fff4';
+            feedbackDiv.style.color = '#276749';
+            feedbackDiv.style.border = '1px solid #c6f6d5';
+          }
+        }, 800);
+        return;
+      }
+
+      // Real submission via fetch
+      fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (res.ok) {
+          clearInlineErrors(form);
+          form.reset();
+          if (feedbackDiv) {
+            feedbackDiv.textContent = '\u2713 ' + config.successMsg;
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.style.background = '#f0fff4';
+            feedbackDiv.style.color = '#276749';
+            feedbackDiv.style.border = '1px solid #c6f6d5';
+          }
+        } else {
+          throw new Error('Server error');
+        }
+      }).catch(function() {
+        if (feedbackDiv) {
+          feedbackDiv.textContent = 'Something went wrong. Please try again or contact us on WhatsApp.';
+          feedbackDiv.style.display = 'block';
+          feedbackDiv.style.background = '#fff5f5';
+          feedbackDiv.style.color = '#c53030';
+          feedbackDiv.style.border = '1px solid #fed7d7';
+        }
+      }).finally(function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = config.btnText;
+      });
+    });
+  });
 
 });

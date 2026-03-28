@@ -1,4 +1,4 @@
-const domain = process.env.SHOPIFY_STORE_DOMAIN || "pqh2cp-x9.myshopify.com";
+const domain = process.env.SHOPIFY_STORE_DOMAIN || "atspeed.work";
 const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_TOKEN || "2e39486c26322ed68598bb3d310eafcb";
 
 export async function shopifyFetch({ query, variables }: { query: string; variables?: any }) {

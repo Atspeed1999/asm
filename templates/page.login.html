@@ -104,7 +104,7 @@
   <script type="module" src="https://cdn.shopify.com/storefront/web-components.js"></script>
 </head>
 <body>
-  <shopify-store store-domain="https://pqh2cp-x9.myshopify.com" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
+  <shopify-store store-domain="https://atspeed.work" public-access-token="2e39486c26322ed68598bb3d310eafcb" language="en" country="IN">
 
   <!-- ==================== ANNOUNCEMENT BAR ==================== -->
   <div class="announcement-bar" id="announcement-bar">
@@ -145,6 +145,7 @@
         </a>
         <button onclick="document.getElementById('cart').showModal()" aria-label="Cart" style="position:relative;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            <span class="cart-badge"></span>
         </button>
       </div>
     </div>
@@ -214,11 +215,13 @@
       </div>
     </div>
     <div class="side-cart-footer">
-      <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-weight:600;">
+      <div class="side-cart-subtotal">
         <span>Subtotal</span>
-        <span>₹0.00</span>
+        <span id="side-cart-subtotal-amount">₹0</span>
       </div>
-      <button class="btn btn-primary" style="background:var(--color-primary-green);color:white;">View Checkout</button>
+      <p class="side-cart-tax-note">Taxes and shipping calculated at checkout</p>
+      <a href="/checkout" class="btn btn-primary" style="background:var(--color-primary-green);color:white;">View Checkout</a>
+      <button class="btn btn-continue-shopping" id="side-cart-continue" type="button">← Continue Shopping</button>
     </div>
   </div>
 
@@ -232,7 +235,7 @@
       <div class="footer-col">
         <h4>Quick Links</h4>
         <a href="../index.html">Home</a>
-        <a href="page.shop.html">Shop All</a>
+        <a href="page.shop.html">Categories</a>
         <a href="page.wholesale.html">Wholesale</a>
       </div>
       <div class="footer-col">
@@ -246,6 +249,24 @@
     </div>
   </footer>
 
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-overlay__close" aria-label="Close search">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="search-overlay__inner">
+      <span class="search-overlay__label">Search Our Collection</span>
+      <form class="search-overlay__form" action="/search" method="GET">
+        <input type="text" name="q" class="search-overlay__input" placeholder="Search fabrics, collections…" autocomplete="off">
+        <button type="submit" class="search-overlay__submit" aria-label="Submit search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <script src="../assets/theme.js"></script>
-  <shopify-cart id="cart"></shopify-cart>\n</shopify-store>\n</body>
+  <shopify-cart id="cart"></shopify-cart>
+</shopify-store>
+</body>
 </html>
